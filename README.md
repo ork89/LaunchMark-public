@@ -1,10 +1,10 @@
-# Marklight
+# LaunchMark
 
-Marklight is a keyboard-first bookmark launcher for Chrome. Open it on any page, type a few letters, move with the arrow keys, and jump straight to the bookmark you want.
+LaunchMark is a keyboard-first bookmark launcher for Chrome. Open it on any page, type a few letters, move with the arrow keys, and jump straight to the bookmark you want.
 
 It is built for people who have too many bookmarks for the bookmarks bar, too many folders for the default manager, and no patience for hunting through nested menus.
 
-## Why Marklight
+## Why LaunchMark
 
 - Fast access to bookmarks from anywhere in the browser
 - Keyboard-first interaction with no tab switching required
@@ -15,14 +15,21 @@ It is built for people who have too many bookmarks for the bookmarks bar, too ma
 
 ### Launcher open with live search
 
-![Marklight launcher open with live bookmark search](store-assets/screenshots/1-launcher-search.png)
+![LaunchMark launcher open with live bookmark search](store-assets/screenshots/1-launcher-search.png)
 
 ### Ranked results with keyboard-first navigation
 
-![Marklight ranked bookmark results with keyboard controls](store-assets/screenshots/2-launcher-results.png)
+![LaunchMark ranked bookmark results with keyboard controls](store-assets/screenshots/2-launcher-results.png)
 
-## Current Performance
+### Privacy First
 
+LaunchMark operates entirely locally in your browser.
+No data is collected, transmitted, or stored remotely.
+Your bookmarks stay yours.
+
+## Performance
+
+LaunchMark is built for speed. Bookmark indexing and search run locally in your browser for quick results, with no network requests.
 Current measurements captured across three bookmark profile sizes.
 
 | Profile Name    | Bookmark Count | Cold Run (ms) | Warm Runs (ms) | Warm Avg (ms) |
@@ -40,7 +47,7 @@ Notes:
 
 ## Core Experience
 
-Marklight currently focuses on one job: getting you to the right bookmark quickly.
+LaunchMark currently focuses on one job: getting you to the right bookmark quickly.
 
 - Global launcher shortcut: `Ctrl+Shift+K` on Windows/Linux, `Command+Shift+K` on macOS
 - Search by bookmark title, URL text, domain, and folder path
@@ -54,12 +61,12 @@ Marklight currently focuses on one job: getting you to the right bookmark quickl
 
 1. Trigger the launcher from the current tab.
 2. Start typing a bookmark title, URL fragment, domain, or folder name.
-3. Marklight ranks matching bookmarks and shows the best results first.
+3. LaunchMark ranks matching bookmarks and shows the best results first.
 4. Use the keyboard to select a result and open it immediately.
 
 The launcher appears directly in the active page, which keeps the interaction fast and avoids context switching into a separate management screen.
 
-## Operating Marklight
+## Operating LaunchMark
 
 ### Open the launcher
 
@@ -84,7 +91,7 @@ The launcher appears directly in the active page, which keeps the interaction fa
 
 ## Configuration
 
-Marklight does not yet include a dedicated settings UI or user customization panel.
+LaunchMark does not yet include a dedicated settings UI or user customization panel.
 
 What you can configure today:
 
@@ -96,7 +103,7 @@ Planned future configuration work may include launcher behavior, ranking control
 
 ## Permissions
 
-Marklight currently requests these permissions:
+LaunchMark currently requests these permissions:
 
 - `bookmarks`: read bookmark data for search and launch
 - `activeTab`: communicate with the current page
@@ -108,7 +115,7 @@ Marklight currently requests these permissions:
 
 Have questions or found an issue? Here's how to reach out:
 
-- **GitHub Issues:** [Report a bug or request a feature](https://github.com/ork89/marklight/issues)
-- **Privacy Policy:** See [PRIVACY.md](PRIVACY.md)
-- **Changelog:** See [CHANGELOG.md](CHANGELOG.md)
-- **Store Listing:** See [STORE-LISTING.md](STORE-LISTING.md) for Chrome Web Store description and metadata
+- **Email the author:** [launchmark.bookmarksearch@gmail.com](mailto:launchmark.bookmarksearch@gmail.com)
+- **GitHub Issues:** [Report a bug or request a feature](https://github.com/ork89/LaunchMark-public/issues)
+- **Privacy Policy:** See [PRIVACY.md](https://github.com/ork89/LaunchMark-public/blob/main/PRIVACY.md)
+- **License:** [LICENSE](https://github.com/ork89/LaunchMark-public/blob/main/LICENSE)
