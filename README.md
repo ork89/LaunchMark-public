@@ -117,5 +117,5 @@ Have questions or found an issue? Here's how to reach out:
 
 - **Email the author:** [launchmark.bookmarksearch@gmail.com](mailto:launchmark.bookmarksearch@gmail.com)
 - **GitHub Issues:** [Report a bug or request a feature](https://github.com/ork89/LaunchMark-public/issues)
-- **Privacy Policy:** See [PRIVACY.md](https://github.com/ork89/LaunchMark-public/blob/main/PRIVACY.md)
+- **Privacy Policy:** See [PRIVACY](https://github.com/ork89/LaunchMark-public/blob/main/PRIVACY.md)
 - **License:** [LICENSE](https://github.com/ork89/LaunchMark-public/blob/main/LICENSE)
