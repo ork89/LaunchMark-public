@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Core -->
+    <title>LaunchMark – Keyboard-First Bookmark Launcher for Chrome</title>
+    <meta
+      name="description"
+      content="LaunchMark instantly searches and opens your Chrome bookmarks with a single keyboard shortcut. No mouse, no menus — just type and jump there."
+    />
+    <meta
+      name="keywords"
+      content="chrome extension, bookmark launcher, bookmark search, keyboard productivity, fast bookmarks, browser extension"
+    />
+    <meta name="author" content="Ori Ko" />
+    <link rel="canonical" href="https://ork89.github.io/LaunchMark-public" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="LaunchMark – Keyboard-First Bookmark Launcher" />
+    <meta
+      property="og:description"
+      content="Instantly search and open any bookmark with a keystroke. Local-only, private, and blazing fast."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ork89.github.io/LaunchMark-public" />
+    <meta property="og:image" content="store-assets/screenshots/1-launcher-search.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LaunchMark – Keyboard-First Bookmark Launcher" />
+    <meta
+      name="twitter:description"
+      content="Instantly search and open any bookmark with a keystroke. No mouse, no menus."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- NAVIGATION -->
+    <nav aria-label="Site navigation">
+      <div class="container nav-inner">
+        <a href="/" class="logo" aria-label="LaunchMark home">
+          <span><img src="store-assets/logo.svg" alt="LaunchMark logo" class="nav-logo" width="16" height="16" /></span
+          >LaunchMark
+        </a>
+        <a href="#install" class="btn-nav" aria-label="Add LaunchMark to Chrome"> Add to Chrome </a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-badge fade-up">Chrome Extension &nbsp;&middot;&nbsp; Free &nbsp;&middot;&nbsp; 100% Local</div>
+
+        <h1 id="hero-heading" class="fade-up d1">Your Bookmarks,<br />Instantly.</h1>
+
+        <p class="hero-sub fade-up d2">
+          Stop hunting through folders. LaunchMark puts every bookmark a keystroke away — search by title, URL, domain,
+          or folder and jump there in seconds.
+        </p>
+
+        <div class="hero-actions fade-up d3">
+          <a href="#install" class="btn-primary" aria-label="Install LaunchMark from the Chrome Web Store">
+            &#x26A1;&nbsp; Add to Chrome &mdash; It's Free
+          </a>
+          <a href="#how-it-works" class="btn-ghost"> See how it works </a>
+        </div>
+
+        <p class="shortcut-hint fade-up d4">
+          Press
+          <span><span class="key">Ctrl</span> + <span class="key">Shift</span> + <span class="key">K</span></span>
+          on any tab to open the launcher
+        </p>
+
+        <div class="hero-visual fade-up d5">
+          <div class="hero-visual-wrap">
+            <img
+              class="hero-screenshot"
+              src="store-assets/screenshots/1-launcher-search.png"
+              alt="LaunchMark launcher open with live bookmark search in progress"
+              width="740"
+              loading="eager"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF STRIP -->
+    <section class="proof" aria-label="Key product facts">
+      <div class="container">
+        <div class="proof-grid">
+          <div class="proof-item reveal">
+            <span class="proof-icon">&#x26A1;</span>
+            <span class="proof-value">&lt; 0.3 ms</span>
+            <span class="proof-desc">Cold-start for 100+ bookmarks</span>
+          </div>
+
+          <div class="proof-item reveal rd1">
+            <span class="proof-icon">&#x1F512;</span>
+            <span class="proof-value">100% Local</span>
+            <span class="proof-desc">No servers, no data collection, ever</span>
+          </div>
+
+          <div class="proof-item reveal rd2">
+            <span class="proof-icon">&#x2328;&#xFE0F;</span>
+            <span class="proof-value">Keyboard-First</span>
+            <span class="proof-desc">Arrow keys, Enter, Escape &mdash; no mouse needed</span>
+          </div>
+
+          <div class="proof-item reveal rd3">
+            <span class="proof-icon">&#x1F310;</span>
+            <span class="proof-value">Any Page</span>
+            <span class="proof-desc">Works on every regular webpage you visit</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" aria-labelledby="features-heading">
+      <div class="container">
+        <div class="features-header">
+          <span class="section-label reveal">Features</span>
+          <h2 id="features-heading" class="section-title reveal">Built for speed. Designed to stay out of your way.</h2>
+          <p class="section-desc reveal">
+            LaunchMark does one job exceptionally well: getting you to the right bookmark with as little friction as
+            possible.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card accent-card reveal">
+            <span class="feature-icon">&#x26A1;</span>
+            <h3>Instant Search</h3>
+            <p>
+              Results appear as you type. Search by title, URL, domain, or folder path. Exact title matches always rank
+              first.
+            </p>
+          </article>
+
+          <article class="feature-card reveal rd1">
+            <span class="feature-icon">&#x2328;&#xFE0F;</span>
+            <h3>Keyboard-First</h3>
+            <p>
+              Open with <span class="key">Ctrl</span>+<span class="key">Shift</span>+<span class="key">K</span>,
+              navigate with arrow keys, confirm with <span class="key">Enter</span>. Never lift your hands.
+            </p>
+          </article>
+
+          <article class="feature-card reveal rd2">
+            <span class="feature-icon">&#x1F512;</span>
+            <h3>Private by Design</h3>
+            <p>
+              All search and indexing happens locally in your browser. Zero telemetry, zero data collection, zero remote
+              servers.
+            </p>
+          </article>
+
+          <article class="feature-card reveal rd3">
+            <span class="feature-icon">&#x1F5C2;&#xFE0F;</span>
+            <h3>Folder-Aware Search</h3>
+            <p>
+              Search by folder name to surface bookmarks buried deep in your tree. Works great for large, well-organized
+              collections.
+            </p>
+          </article>
+
+          <article class="feature-card reveal rd1">
+            <span class="feature-icon">&#x1FAB6;</span>
+            <h3>Lightweight Overlay</h3>
+            <p>
+              A focused in-page panel &mdash; not a heavy management UI. It opens instantly and disappears the moment
+              you're done.
+            </p>
+          </article>
+
+          <article class="feature-card reveal rd2">
+            <span class="feature-icon">&#x1F517;</span>
+            <h3>Opens Your Way</h3>
+            <p>
+              Press <span class="key">Enter</span> for the current tab or <span class="key">Ctrl</span>+<span
+                class="key"
+                >Enter</span
+              >
+              for a new tab. Your workflow, your choice.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="how-it-works" aria-labelledby="how-heading">
+      <div class="container">
+        <div class="how-header">
+          <span class="section-label reveal">How it works</span>
+          <h2 id="how-heading" class="section-title reveal">Four keystrokes to any bookmark</h2>
+          <p class="section-desc reveal">
+            The launcher appears directly in the active tab &mdash; no context switching, no new windows, no friction.
+          </p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card reveal">
+            <div class="step-num">1</div>
+            <h3>Trigger the launcher</h3>
+            <p>
+              Press <span class="key">Ctrl</span>+<span class="key">Shift</span>+<span class="key">K</span> on any
+              regular webpage. The launcher appears instantly.
+            </p>
+          </div>
+
+          <div class="step-card reveal rd1">
+            <div class="step-num">2</div>
+            <h3>Type to search</h3>
+            <p>
+              Start typing a title, URL fragment, domain, or folder name. Results narrow in real time with every
+              keystroke.
+            </p>
+          </div>
+
+          <div class="step-card reveal rd2">
+            <div class="step-num">3</div>
+            <h3>Navigate results</h3>
+            <p>
+              Use <span class="key">&uarr;</span> and <span class="key">&darr;</span> to move through ranked results.
+              The best match is always at the top.
+            </p>
+          </div>
+
+          <div class="step-card reveal rd3">
+            <div class="step-num">4</div>
+            <h3>Open &amp; go</h3>
+            <p>
+              Press <span class="key">Enter</span> to open in the current tab, or <span class="key">Ctrl</span>+<span
+                class="key"
+                >Enter</span
+              >
+              for a new tab. Done.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREENSHOTS -->
+    <section id="screenshots" aria-labelledby="screenshots-heading">
+      <div class="container">
+        <div class="screenshots-header">
+          <span class="section-label reveal">See it in action</span>
+          <h2 id="screenshots-heading" class="section-title reveal">What it looks like</h2>
+        </div>
+
+        <div class="screenshots-grid">
+          <figure class="screenshot-card reveal">
+            <a href="#lb-1" class="lb-thumb" aria-label="Enlarge: Live search across all bookmarks">
+              <img
+                src="store-assets/screenshots/1-launcher-search.png"
+                alt="LaunchMark launcher open with live bookmark search"
+                loading="lazy"
+              />
+            </a>
+            <figcaption class="screenshot-caption">Live search across all bookmarks</figcaption>
+          </figure>
+
+          <figure class="screenshot-card reveal rd1">
+            <a href="#lb-2" class="lb-thumb" aria-label="Enlarge: Ranked results with keyboard navigation">
+              <img
+                src="store-assets/screenshots/2-launcher-results.png"
+                alt="LaunchMark showing ranked bookmark results with keyboard selection"
+                loading="lazy"
+              />
+            </a>
+            <figcaption class="screenshot-caption">Ranked results with keyboard navigation</figcaption>
+          </figure>
+
+          <figure class="screenshot-card reveal rd2">
+            <a href="#lb-3" class="lb-thumb" aria-label="Enlarge: Search by folder name and path">
+              <img
+                src="store-assets/screenshots/3-search-by-folder-name.png"
+                alt="LaunchMark search results filtered by folder name and path"
+                loading="lazy"
+              />
+            </a>
+            <figcaption class="screenshot-caption">Search by folder name and path</figcaption>
+          </figure>
+
+          <figure class="screenshot-card reveal rd3">
+            <a href="#lb-4" class="lb-thumb" aria-label="Enlarge: Fallback popup on restricted pages">
+              <img
+                src="store-assets/screenshots/4-restricted-page-launcher.png"
+                alt="LaunchMark fallback popup on a restricted Chrome page"
+                loading="lazy"
+              />
+            </a>
+            <figcaption class="screenshot-caption">Fallback popup on restricted pages</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIGHTBOX CAROUSEL
+         Primary  (Chrome 135+): scroll-snap + ::scroll-button() + ::scroll-marker
+         Fallback (Firefox / Safari): radio-input + translateX technique -->
+    <div class="lb-overlay" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+      <!-- Hidden radios: track active slide in fallback browsers -->
+      <input type="radio" name="lb" id="lb-r1" checked />
+      <input type="radio" name="lb" id="lb-r2" />
+      <input type="radio" name="lb" id="lb-r3" />
+      <input type="radio" name="lb" id="lb-r4" />
+
+      <!-- Click-to-close backdrop -->
+      <a href="#screenshots" class="lb-backdrop" aria-label="Close viewer" tabindex="-1"></a>
+
+      <!-- Close button -->
+      <a href="#screenshots" class="lb-close" aria-label="Close viewer">&times;</a>
+
+      <!-- Slide track -->
+      <div class="lb-track">
+        <div class="lb-slide" id="lb-1">
+          <img
+            src="store-assets/screenshots/1-launcher-search.png"
+            alt="LaunchMark launcher open with live bookmark search"
+          />
+          <p class="lb-caption">Live search across all bookmarks</p>
+        </div>
+
+        <div class="lb-slide" id="lb-2">
+          <img
+            src="store-assets/screenshots/2-launcher-results.png"
+            alt="LaunchMark showing ranked bookmark results with keyboard selection"
+          />
+          <p class="lb-caption">Ranked results with keyboard navigation</p>
+        </div>
+
+        <div class="lb-slide" id="lb-3">
+          <img
+            src="store-assets/screenshots/3-search-by-folder-name.png"
+            alt="LaunchMark search results filtered by folder name and path"
+          />
+          <p class="lb-caption">Search by folder name and path</p>
+        </div>
+
+        <div class="lb-slide" id="lb-4">
+          <img
+            src="store-assets/screenshots/4-restricted-page-launcher.png"
+            alt="LaunchMark fallback popup on a restricted Chrome page"
+          />
+          <p class="lb-caption">Fallback popup on restricted pages</p>
+        </div>
+      </div>
+      <!-- /.lb-track -->
+
+      <!-- Fallback arrows — hidden in browsers that support ::scroll-button() -->
+      <div class="lb-arrows" aria-hidden="true">
+        <label for="lb-r4" class="lb-prev s1">&#10094;</label>
+        <label for="lb-r2" class="lb-next s1">&#10095;</label>
+
+        <label for="lb-r1" class="lb-prev s2">&#10094;</label>
+        <label for="lb-r3" class="lb-next s2">&#10095;</label>
+
+        <label for="lb-r2" class="lb-prev s3">&#10094;</label>
+        <label for="lb-r4" class="lb-next s3">&#10095;</label>
+
+        <label for="lb-r3" class="lb-prev s4">&#10094;</label>
+        <label for="lb-r1" class="lb-next s4">&#10095;</label>
+      </div>
+
+      <!-- Fallback dots — hidden in browsers that support ::scroll-marker -->
+      <div class="lb-dots" aria-hidden="true">
+        <label for="lb-r1"></label>
+        <label for="lb-r2"></label>
+        <label for="lb-r3"></label>
+        <label for="lb-r4"></label>
+      </div>
+    </div>
+    <!-- /.lb-overlay -->
+
+    <!-- TRUST / PERMISSIONS -->
+    <section class="trust" aria-labelledby="trust-heading">
+      <div class="container">
+        <div class="trust-header">
+          <span class="section-label reveal">Privacy &amp; Permissions</span>
+          <h2 id="trust-heading" class="section-title reveal">Nothing leaves your browser</h2>
+          <p class="section-desc reveal">
+            LaunchMark only asks for what it needs. Every permission has a specific, understandable reason &mdash; and
+            no data is ever sent anywhere.
+          </p>
+        </div>
+
+        <div class="trust-grid">
+          <div class="trust-card reveal">
+            <span class="trust-icon">&#x1F4DA;</span>
+            <div>
+              <h4>Bookmarks</h4>
+              <p>Read your saved bookmarks to build the local search index. Nothing is modified or transmitted.</p>
+            </div>
+          </div>
+
+          <div class="trust-card reveal rd1">
+            <span class="trust-icon">&#x1F5C2;&#xFE0F;</span>
+            <div>
+              <h4>activeTab</h4>
+              <p>Display the launcher overlay in the active tab. Used only when you trigger the shortcut.</p>
+            </div>
+          </div>
+
+          <div class="trust-card reveal rd2">
+            <span class="trust-icon">&#x1F516;</span>
+            <div>
+              <h4>tabs</h4>
+              <p>Detect the active tab so the keyboard shortcut works and the launcher targets the right page.</p>
+            </div>
+          </div>
+
+          <div class="trust-card reveal rd3">
+            <span class="trust-icon">&#x1F4DC;</span>
+            <div>
+              <h4>scripting</h4>
+              <p>Inject the launcher UI as a fallback on pages where content scripts load dynamically.</p>
+            </div>
+          </div>
+
+          <div class="trust-card reveal rd1">
+            <span class="trust-icon">&#x1F310;</span>
+            <div>
+              <h4>&lt;all_urls&gt;</h4>
+              <p>Allow the launcher to appear on any regular webpage &mdash; not limited to specific domains.</p>
+            </div>
+          </div>
+
+          <div class="trust-card reveal rd2">
+            <span class="trust-icon">&#x1F512;</span>
+            <div>
+              <h4>No remote servers</h4>
+              <p>Zero analytics, zero telemetry, zero data transmission. All processing stays on your device.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section id="install" class="cta-section" aria-labelledby="cta-heading">
+      <div class="container">
+        <h2 id="cta-heading" class="reveal">Stop searching through folders.<br />Start launching.</h2>
+
+        <p class="reveal">Free forever. Works immediately. No account, no setup, no data shared.</p>
+
+        <div class="reveal">
+          <a href="#" class="btn-primary" aria-label="Add LaunchMark to Chrome from the Web Store">
+            &#x26A1;&nbsp; Add to Chrome &mdash; It's Free
+          </a>
+        </div>
+
+        <div class="cta-pills reveal">
+          <span class="trust-pill">&#x1F512; Local-only</span>
+          <span class="trust-pill">&#x2713; No data collected</span>
+          <span class="trust-pill">&#x2713; Free forever</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <a href="/" class="logo" aria-label="LaunchMark home">
+            <span
+              ><img src="store-assets/logo.svg" alt="LaunchMark logo" class="nav-logo" width="16" height="16" /></span
+            >LaunchMark
+          </a>
+
+          <ul class="footer-links" role="list">
+            <li>
+              <a href="https://github.com/ork89/LaunchMark-public" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/ork89/LaunchMark-public/blob/main/PRIVACY.md"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Privacy Policy</a
+              >
+            </li>
+            <li><a href="mailto:launchmark.bookmarksearch@gmail.com">Contact</a></li>
+            <li>
+              <a
+                href="https://github.com/ork89/LaunchMark-public/blob/main/LICENSE"
+                target="_blank"
+                rel="noopener noreferrer"
+                >License</a
+              >
+            </li>
+          </ul>
+
+          <p class="footer-copy">&copy; 2026 LaunchMark</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll-reveal (no framework, no dependencies) -->
+    <script>
+      (function () {
+        var els = document.querySelectorAll('.reveal');
+        if (!('IntersectionObserver' in window)) {
+          els.forEach(function (el) {
+            el.classList.add('visible');
+          });
+          return;
+        }
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -44px 0px' },
+        );
+        els.forEach(function (el) {
+          io.observe(el);
+        });
+      })();
+
+      // Sync fallback radio state with hash-based slide links
+      // (ensures Firefox/Safari open to the correct slide when a thumbnail is clicked)
+      (function () {
+        function syncRadio() {
+          var m = location.hash.match(/^#lb-(\d+)$/);
+          if (m) {
+            var r = document.getElementById('lb-r' + m[1]);
+            if (r) r.checked = true;
+          }
+        }
+        syncRadio();
+        window.addEventListener('hashchange', syncRadio);
+      })();
+    </script>
+  </body>
+</html>
