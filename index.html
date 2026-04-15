@@ -303,78 +303,83 @@
     </section>
 
     <!-- LIGHTBOX CAROUSEL
-         Primary  (Chrome 135+): scroll-snap + ::scroll-button() + ::scroll-marker
-         Fallback (Firefox / Safari): radio-input + translateX technique -->
+         Base/Fallback (all browsers): :target shows the active slide — no JS, no radios.
+                                       Per-slide close/prev/next are always-visible <a> links.
+         Modern (Chrome 135+): @supports override adds scroll-snap + ::scroll-button() + ::scroll-marker -->
     <div class="lb-overlay" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
-      <!-- Hidden radios: track active slide in fallback browsers -->
-      <input type="radio" name="lb" id="lb-r1" checked />
-      <input type="radio" name="lb" id="lb-r2" />
-      <input type="radio" name="lb" id="lb-r3" />
-      <input type="radio" name="lb" id="lb-r4" />
-
-      <!-- Click-to-close backdrop -->
+      <!-- Click-to-close backdrop (z-index below all controls) -->
       <a href="#screenshots" class="lb-backdrop" aria-label="Close viewer" tabindex="-1"></a>
 
-      <!-- Close button -->
-      <a href="#screenshots" class="lb-close" aria-label="Close viewer">&times;</a>
+      <!-- Standalone close for modern mode (each slide has its own .lb-close in fallback) -->
+      <a href="#screenshots" class="lb-close-standalone" aria-label="Close viewer">&times;</a>
 
       <!-- Slide track -->
       <div class="lb-track">
         <div class="lb-slide" id="lb-1">
+          <!-- Controls are inside each slide so they show unconditionally when the slide is :target -->
+          <div class="lb-controls">
+            <a href="#screenshots" class="lb-close" aria-label="Close viewer">&times;</a>
+            <a href="#lb-4" class="lb-prev" aria-label="Previous screenshot">&#10094;</a>
+            <a href="#lb-2" class="lb-next" aria-label="Next screenshot">&#10095;</a>
+          </div>
           <img
             src="store-assets/screenshots/1-launcher-search.png"
             alt="LaunchMark launcher open with live bookmark search"
           />
           <p class="lb-caption">Live search across all bookmarks</p>
+          <div class="lb-nav"><span class="lb-counter">1 / 4</span></div>
         </div>
 
         <div class="lb-slide" id="lb-2">
+          <div class="lb-controls">
+            <a href="#screenshots" class="lb-close" aria-label="Close viewer">&times;</a>
+            <a href="#lb-1" class="lb-prev" aria-label="Previous screenshot">&#10094;</a>
+            <a href="#lb-3" class="lb-next" aria-label="Next screenshot">&#10095;</a>
+          </div>
           <img
             src="store-assets/screenshots/2-launcher-results.png"
             alt="LaunchMark showing ranked bookmark results with keyboard selection"
           />
           <p class="lb-caption">Ranked results with keyboard navigation</p>
+          <div class="lb-nav"><span class="lb-counter">2 / 4</span></div>
         </div>
 
         <div class="lb-slide" id="lb-3">
+          <div class="lb-controls">
+            <a href="#screenshots" class="lb-close" aria-label="Close viewer">&times;</a>
+            <a href="#lb-2" class="lb-prev" aria-label="Previous screenshot">&#10094;</a>
+            <a href="#lb-4" class="lb-next" aria-label="Next screenshot">&#10095;</a>
+          </div>
           <img
             src="store-assets/screenshots/3-search-by-folder-name.png"
             alt="LaunchMark search results filtered by folder name and path"
           />
           <p class="lb-caption">Search by folder name and path</p>
+          <div class="lb-nav"><span class="lb-counter">3 / 4</span></div>
         </div>
 
         <div class="lb-slide" id="lb-4">
+          <div class="lb-controls">
+            <a href="#screenshots" class="lb-close" aria-label="Close viewer">&times;</a>
+            <a href="#lb-3" class="lb-prev" aria-label="Previous screenshot">&#10094;</a>
+            <a href="#lb-1" class="lb-next" aria-label="Next screenshot">&#10095;</a>
+          </div>
           <img
             src="store-assets/screenshots/4-restricted-page-launcher.png"
             alt="LaunchMark fallback popup on a restricted Chrome page"
           />
           <p class="lb-caption">Fallback popup on restricted pages</p>
+          <div class="lb-nav"><span class="lb-counter">4 / 4</span></div>
         </div>
       </div>
       <!-- /.lb-track -->
 
-      <!-- Fallback arrows — hidden in browsers that support ::scroll-button() -->
-      <div class="lb-arrows" aria-hidden="true">
-        <label for="lb-r4" class="lb-prev s1">&#10094;</label>
-        <label for="lb-r2" class="lb-next s1">&#10095;</label>
-
-        <label for="lb-r1" class="lb-prev s2">&#10094;</label>
-        <label for="lb-r3" class="lb-next s2">&#10095;</label>
-
-        <label for="lb-r2" class="lb-prev s3">&#10094;</label>
-        <label for="lb-r4" class="lb-next s3">&#10095;</label>
-
-        <label for="lb-r3" class="lb-prev s4">&#10094;</label>
-        <label for="lb-r1" class="lb-next s4">&#10095;</label>
-      </div>
-
-      <!-- Fallback dots — hidden in browsers that support ::scroll-marker -->
+      <!-- Dot navigation — active dot highlighted via :has(:target); replaced by ::scroll-marker in modern mode -->
       <div class="lb-dots" aria-hidden="true">
-        <label for="lb-r1"></label>
-        <label for="lb-r2"></label>
-        <label for="lb-r3"></label>
-        <label for="lb-r4"></label>
+        <a href="#lb-1" class="lb-dot" aria-label="Screenshot 1"></a>
+        <a href="#lb-2" class="lb-dot" aria-label="Screenshot 2"></a>
+        <a href="#lb-3" class="lb-dot" aria-label="Screenshot 3"></a>
+        <a href="#lb-4" class="lb-dot" aria-label="Screenshot 4"></a>
       </div>
     </div>
     <!-- /.lb-overlay -->
@@ -526,20 +531,6 @@
         els.forEach(function (el) {
           io.observe(el);
         });
-      })();
-
-      // Sync fallback radio state with hash-based slide links
-      // (ensures Firefox/Safari open to the correct slide when a thumbnail is clicked)
-      (function () {
-        function syncRadio() {
-          var m = location.hash.match(/^#lb-(\d+)$/);
-          if (m) {
-            var r = document.getElementById('lb-r' + m[1]);
-            if (r) r.checked = true;
-          }
-        }
-        syncRadio();
-        window.addEventListener('hashchange', syncRadio);
       })();
     </script>
   </body>

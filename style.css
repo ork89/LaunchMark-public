@@ -782,11 +782,14 @@ footer {
 
 /* ================================================
    LIGHTBOX / CAROUSEL
-   Primary   → Chrome 135+: scroll-snap + ::scroll-button() + ::scroll-marker
-   Fallback  → Firefox / Safari: radio-input + translateX technique
+   Fallback (all browsers): .lb-slide:target { display:flex }
+     — Close/prev/next are plain <a> links inside each slide.
+     — No JS, no radios. Works in every modern browser.
+   Modern (Chrome 135+): scroll-snap + ::scroll-button() + ::scroll-marker
+     — gated behind @supports selector(::scroll-button(right))
 ================================================ */
 
-/* --- OVERLAY SHELL --- */
+/* --- OVERLAY --- */
 .lb-overlay {
   position: fixed;
   inset: 0;
@@ -796,7 +799,6 @@ footer {
   -webkit-backdrop-filter: blur(10px);
   visibility: hidden;
   opacity: 0;
-  overflow: hidden; /* clips 400%-wide fallback track */
   display: flex;
   flex-direction: column;
   transition:
@@ -813,14 +815,7 @@ footer {
   }
 }
 
-/* Hidden radio inputs — control fallback carousel state */
-.lb-overlay input[type='radio'] {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Click-to-close backdrop */
+/* Invisible click-to-close backdrop */
 .lb-backdrop {
   position: absolute;
   inset: 0;
@@ -828,63 +823,33 @@ footer {
   z-index: 0;
 }
 
-/* Close button */
-.lb-close {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.5rem;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  color: var(--text-secondary);
-  font-size: 1.35rem;
-  font-weight: 300;
-  line-height: 1;
-  text-decoration: none;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
-}
-.lb-close:hover {
-  background: var(--bg-hover);
-  color: var(--text);
-  border-color: var(--border-hover);
-  text-decoration: none;
-}
-
-/* ---- FALLBACK CAROUSEL: radio + translateX (Firefox, Safari) ---- */
-
-/* Track: 4× viewport width, slides shifted by transform */
+/* --- FALLBACK SLIDE TRACK ---
+   Relative container; slides stacked absolutely.
+   Only the :target slide is shown (display:flex). */
 .lb-track {
-  flex: 1;
-  display: flex;
-  width: 400%;
-  transition: transform 0.5s ease;
   position: relative;
-  z-index: 1;
+  flex: 1;
+  overflow: hidden;
 }
 
-/* Each slide = 25% of 400% track = 100vw */
 .lb-slide {
-  flex: 0 0 25%;
-  display: flex;
+  position: absolute;
+  inset: 0;
+  display: none; /* hidden by default */
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1.25rem;
-  padding: 4rem 1.5rem 1.5rem;
+  padding: 1rem 5rem 4.5rem; /* horizontal padding clears arrow buttons */
+  z-index: 1;
+}
+.lb-slide:target {
+  display: flex; /* shown when its ID matches the URL hash */
 }
 
 .lb-slide img {
-  max-width: min(86vw, 1040px);
-  max-height: 65vh;
+  max-width: min(82vw, 1040px);
+  max-height: 64vh;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -901,33 +866,52 @@ footer {
   max-width: 480px;
 }
 
-/* Slide selection via checked radio */
-#lb-r1:checked ~ .lb-track {
-  transform: translateX(0);
-}
-#lb-r2:checked ~ .lb-track {
-  transform: translateX(-25%);
-}
-#lb-r3:checked ~ .lb-track {
-  transform: translateX(-50%);
-}
-#lb-r4:checked ~ .lb-track {
-  transform: translateX(-75%);
-}
-
-/* Fallback arrows */
-.lb-arrows {
+/* Per-slide controls: close + prev/next (always present, no state deps) */
+.lb-controls {
   position: absolute;
   inset: 0;
   z-index: 10;
   pointer-events: none;
 }
-.lb-arrows label {
+
+/* Close button — top-right */
+.lb-close {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.25rem;
+  pointer-events: auto;
+  display: flex;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-secondary);
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+.lb-close:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+  border-color: var(--border-hover);
+  text-decoration: none;
+}
+
+/* Prev / Next arrow buttons — vertically centred */
+.lb-prev,
+.lb-next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: auto;
-  display: none; /* shown only for the active slide's pair */
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 46px;
@@ -937,17 +921,11 @@ footer {
   border-radius: 50%;
   color: var(--text);
   font-size: 1.05rem;
-  cursor: pointer;
-  user-select: none;
+  text-decoration: none;
   transition:
     background 0.2s,
     border-color 0.2s,
     scale 0.18s;
-}
-.lb-arrows label:hover {
-  background: var(--bg-hover);
-  border-color: var(--border-hover);
-  scale: 1.1;
 }
 .lb-prev {
   left: 1rem;
@@ -955,89 +933,112 @@ footer {
 .lb-next {
   right: 1rem;
 }
-
-/* Reveal only the arrow pair that belongs to the active slide */
-#lb-r1:checked ~ .lb-arrows .s1,
-#lb-r2:checked ~ .lb-arrows .s2,
-#lb-r3:checked ~ .lb-arrows .s3,
-#lb-r4:checked ~ .lb-arrows .s4 {
-  display: flex;
+.lb-prev:hover,
+.lb-next:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-hover);
+  scale: 1.1;
+  text-decoration: none;
 }
 
-/* Fallback dots */
-.lb-dots {
-  flex-shrink: 0;
+/* Counter text between arrows (optional — kept for UX) */
+.lb-nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
-  height: 2.5rem;
-  position: relative;
+  gap: 0.75rem;
+  position: absolute;
+  bottom: 1.1rem;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
 }
-.lb-dots label {
+.lb-counter {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  padding: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Dot strip — links; active dot via :has(:target) */
+.lb-dots {
+  position: absolute;
+  bottom: 2.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  z-index: 10;
+}
+.lb-dot {
   display: block;
   width: 8px;
   height: 8px;
   background: rgba(230, 237, 243, 0.22);
   border-radius: 50%;
   cursor: pointer;
+  text-decoration: none;
   transition:
     background 0.2s,
     scale 0.2s;
 }
-
-/* Active dot */
-#lb-r1:checked ~ .lb-dots label:nth-child(1),
-#lb-r2:checked ~ .lb-dots label:nth-child(2),
-#lb-r3:checked ~ .lb-dots label:nth-child(3),
-#lb-r4:checked ~ .lb-dots label:nth-child(4) {
+/* Highlight the dot that matches the current :target — Firefox 121+ */
+.lb-overlay:has(#lb-1:target) .lb-dots .lb-dot:nth-child(1),
+.lb-overlay:has(#lb-2:target) .lb-dots .lb-dot:nth-child(2),
+.lb-overlay:has(#lb-3:target) .lb-dots .lb-dot:nth-child(3),
+.lb-overlay:has(#lb-4:target) .lb-dots .lb-dot:nth-child(4) {
   background: var(--accent);
   scale: 1.4;
 }
 
 /* ================================================================
    MODERN OVERRIDE — Chrome 135+
-   scroll-snap + ::scroll-button() + ::scroll-marker
-   @supports gates this so Firefox / Safari keep the fallback above
+   Replaces fallback slide stack with scroll-snap.
+   ::scroll-button() drives prev/next; ::scroll-marker drives dots.
+   Everything is gated so Firefox/Safari never see these rules.
 ================================================================ */
 @supports selector(::scroll-button(right)) {
-  /* Convert track to a scroll-snap container */
+  /* Convert track to a horizontal scroll-snap container */
   .lb-track {
-    width: 100%;
+    position: relative;
+    display: flex;
     overflow-x: auto;
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none;
-    transition: none;
-    scroll-marker-group: after; /* renders dot strip below the track */
-    position: relative; /* containing block for scroll buttons */
+    scroll-marker-group: after;
   }
   .lb-track::-webkit-scrollbar {
     display: none;
   }
 
-  /* Full-width slides */
+  /* Slides become full-width flex items */
   .lb-slide {
+    position: relative;
+    inset: auto;
     flex: 0 0 100%;
+    min-height: 100%;
+    display: flex; /* always shown; scroll-snap handles viewport clipping */
     scroll-snap-align: start;
+    padding: 1rem 5rem 4.5rem;
   }
 
-  /* Disable radio-driven transforms */
-  #lb-r1:checked ~ .lb-track,
-  #lb-r2:checked ~ .lb-track,
-  #lb-r3:checked ~ .lb-track,
-  #lb-r4:checked ~ .lb-track {
-    transform: none;
-  }
-
-  /* Hide fallback controls */
-  .lb-arrows,
+  /* Hide fallback controls; ::scroll-button() + ::scroll-marker take over */
+  .lb-controls,
   .lb-dots {
     display: none;
   }
 
-  /* ::scroll-button — prev / next arrows */
+  /* Show the standalone close button (per-slide .lb-close is hidden in modern mode) */
+  .lb-close-standalone {
+    display: flex;
+  }
+
+  /* prev / next scroll buttons */
   .lb-track::scroll-button(left),
   .lb-track::scroll-button(right) {
     position: absolute;
@@ -1068,7 +1069,6 @@ footer {
     content: '❯';
     right: 1rem;
   }
-
   .lb-track::scroll-button(left):hover,
   .lb-track::scroll-button(right):hover {
     background: var(--bg-hover);
@@ -1082,19 +1082,17 @@ footer {
     scale: 1;
   }
 
-  /* ::scroll-marker-group — dot strip rendered after the track */
+  /* Dot strip rendered by ::scroll-marker-group */
   .lb-track::scroll-marker-group {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.55rem;
-    height: 2.5rem;
+    height: 2.75rem;
   }
-
-  /* ::scroll-marker — individual dots */
   .lb-slide::scroll-marker {
     content: ' ';
-    display: inline-block;
+    display: block;
     width: 8px;
     height: 8px;
     background: rgba(230, 237, 243, 0.22);
@@ -1108,6 +1106,42 @@ footer {
     background: var(--accent);
     scale: 1.4;
   }
+
+  /* In modern mode, stick a standalone close button on the overlay */
+  .lb-overlay > .lb-close-standalone {
+    display: flex;
+  }
+}
+
+/* Standalone close for modern mode (hidden in fallback where per-slide .lb-close is used) */
+.lb-close-standalone {
+  display: none;
+  position: absolute;
+  top: 1.1rem;
+  right: 1.25rem;
+  z-index: 30;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-secondary);
+  font-size: 1.35rem;
+  font-weight: 300;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+}
+.lb-close-standalone:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+  border-color: var(--border-hover);
+  text-decoration: none;
 }
 
 /* Thumbnail — zoom cursor + expand badge on hover */
@@ -1143,7 +1177,6 @@ footer {
     transition: none;
   }
   .lb-track {
-    transition: none !important;
     scroll-behavior: auto;
   }
 }
